@@ -1,4 +1,6 @@
-﻿using ITHMS.Models.Enums;
+﻿// Represents an IT support request submitted by a user.
+
+using ITHMS.Models.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace ITHMS.Models
@@ -24,11 +26,13 @@ namespace ITHMS.Models
             Description = description;
         }
 
+        // Checks whether the ticket is still active.
         public bool IsActive()
         {
             return  Status == TicketStatus.Open || Status == TicketStatus.InProgress;
         }
 
+        // Closes a ticket only if it has been resolved.
         public void Close()
         {
             if(Status != TicketStatus.Resolved )

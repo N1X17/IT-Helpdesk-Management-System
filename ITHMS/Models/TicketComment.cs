@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿// Represents a comment associated with a support ticket.
+
+using System.ComponentModel.DataAnnotations;
 using System.Reflection.Metadata;
 
 namespace ITHMS.Models
@@ -26,6 +28,7 @@ namespace ITHMS.Models
             Message = message;
         }
 
+        // Returns a shortened version of the comment.
         public string GetPreview()
         {
             return Message.Length <= 50 ? Message: Message[..50] + "...";

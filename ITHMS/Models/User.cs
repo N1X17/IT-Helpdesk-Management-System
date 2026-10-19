@@ -1,6 +1,5 @@
 ﻿
-// This class represents a system user.
-// It contains properties, constructors, and a business method (IsSupportStaff())
+// Represents a system user and their assigned role.
 
 using ITHMS.Models.Enums;
 
@@ -24,7 +23,8 @@ namespace ITHMS.Models
             Email = email;
             Role = role;
         }
-        
+
+        // Checks whether the user has an IT support role.
         public bool IsSupportStaff()
         {
             return Role == UserRole.Technician || Role == UserRole.Administrator;
