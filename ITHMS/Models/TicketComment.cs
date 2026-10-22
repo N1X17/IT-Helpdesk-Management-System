@@ -15,8 +15,9 @@ namespace ITHMS.Models
         [Range(1, int.MaxValue)]
         public int UserId {  get; set; }
 
+        [Required(ErrorMessage = "Comment is required.")]
         [StringLength(1000, MinimumLength = 2)]
-        public required string Message {  get; set; }
+        public string Message { get; set; } = "";
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
         public TicketComment() { }

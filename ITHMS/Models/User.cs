@@ -2,14 +2,21 @@
 // Represents a system user and their assigned role.
 
 using ITHMS.Models.Enums;
+using System.ComponentModel.DataAnnotations;
 
 namespace ITHMS.Models
 {
     public class User
     {
         public int UserId {get; set;}
-        public required string FullName { get; set; }
-        public required string Email { get; set; }
+
+        [Required(ErrorMessage = "Name is required.")]
+        [StringLength(100, MinimumLength = 3)]
+        public string FullName { get; set; } = "";
+
+        [Required(ErrorMessage = "Email is required.")]
+        [EmailAddress]
+        public string Email { get; set; } = "";
         public UserRole Role { get; set; }
 
         public User()
