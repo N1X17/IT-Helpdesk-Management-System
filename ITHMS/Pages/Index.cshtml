@@ -4,7 +4,17 @@
     ViewData["Title"] = "Home page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="container pb-5 text-center">
+    <h3> Who Can Use ITHMS?</h3>
+    <p class="test-muted">
+        Employees can submit IT requests,
+        technicians can manage and resolve issues,
+        and administrators can oversee 
+        helpdesk operations.
+    </p>
+
+    <p>
+        Please sign in to access your helpdesk account.
+        <a asp-page="/Account/Login"> Login </a>
+    </p>
 </div>
