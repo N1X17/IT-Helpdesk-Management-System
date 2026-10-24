@@ -5,17 +5,17 @@ using ITHMS.Models.Enums;
 namespace ITHMS.Services
 {
     // Stores and manages helpdesk data.
-    public class HelpdeskStore
+    public static class HelpdeskStore
     {
         // Lists to store users, tickets and comments.
-        public List<User> Users = new List<User>();
-        public List<Ticket> Tickets = new List<Ticket>();
-        public List<TicketComment> Comments =new List<TicketComment>();
-        private int nextTicketId = 1;
-        private int nextCommentId = 1;
+        public static List<User> Users = new List<User>();
+        public static List<Ticket> Tickets = new List<Ticket>();
+        public static List<TicketComment> Comments =new List<TicketComment>();
+        private static int nextTicketId = 1;
+        private static int nextCommentId = 1;
 
         // Adds sample users to the system.
-        public HelpdeskStore()
+        static HelpdeskStore()
         {
             Users.Add(new User() { UserId = 1, FullName = "Demo Employee", Email = "employee@example.com", Role = UserRole.Employee });
             Users.Add(new User() { UserId = 2, FullName = "Demo Technician", Email = "technician@example.com", Role = UserRole.Technician });
@@ -23,19 +23,19 @@ namespace ITHMS.Services
         }
 
         // Returns all users.
-        public List<User> GetUsers()
+        public static List<User> GetUsers()
         {
             return Users;
         }
 
         // Returns all tickets.
-        public List<Ticket> GetTickets()
+        public static List<Ticket> GetTickets()
         {
             return Tickets;
         }
 
         // Finds a ticket using its ID. retuen value might be null
-        public Ticket? GetTicket(int id) 
+        public static Ticket? GetTicket(int id) 
         {
             foreach (Ticket ticket in Tickets)
             {
@@ -49,7 +49,7 @@ namespace ITHMS.Services
         }
 
         // Creates a new ticket.
-        public Ticket CreateTicket(int userId, string title, string description, TicketPriority priority)
+        public static Ticket CreateTicket(int userId, string title, string description, TicketPriority priority)
         {
             if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(description))
             {
@@ -73,7 +73,7 @@ namespace ITHMS.Services
         }
 
         // Changes a ticket's status.
-        public void UpdateStatus(int ticketId, TicketStatus status)
+        public static void UpdateStatus(int ticketId, TicketStatus status)
         {
             Ticket? ticket = GetTicket(ticketId); //nullable 
             if (ticket == null)
@@ -84,7 +84,7 @@ namespace ITHMS.Services
         }
 
         // Assigns a technician to a ticket.
-        public void AssignTechnician(int ticketId, int technicianId)
+        public static void AssignTechnician(int ticketId, int technicianId)
         {
             Ticket? ticket = GetTicket(ticketId);
             if (ticket == null)
@@ -95,7 +95,7 @@ namespace ITHMS.Services
         }
 
         // Returns comments belonging to a ticket.
-        public List<TicketComment> GetComments(int ticketId)
+        public static List<TicketComment> GetComments(int ticketId)
         {
             List<TicketComment> result =new List<TicketComment>();
             foreach (TicketComment comment in Comments)
@@ -109,7 +109,7 @@ namespace ITHMS.Services
         }
 
         // Adds a comment to a ticket.
-        public void AddComment(int ticketId, int userId, string message)
+        public static void AddComment(int ticketId, int userId, string message)
         {
             if (GetTicket(ticketId) == null)
             {

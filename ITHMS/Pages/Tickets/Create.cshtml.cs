@@ -8,23 +8,17 @@ namespace ITHMS.Pages.Tickets
 {
     public class CreateModel : PageModel
     {
-        private readonly HelpdeskStore store;
         public List<User> users = new List<User>();
         public string? Message { get; set; }
 
-        public CreateModel(HelpdeskStore helpdeskStore)
-        {
-            store = helpdeskStore;
-        }
-
         public void OnGet()
         {
-            users = store.GetUsers();
+            users = HelpdeskStore.GetUsers();
         }
 
         public void OnPost(int userId, string title, string description, TicketPriority priority)
         {
-            users = store.GetUsers();
+            users = HelpdeskStore.GetUsers();
             if (userId == 0)
             {
                 Message = "Please select an Employee.";
@@ -41,7 +35,7 @@ namespace ITHMS.Pages.Tickets
             {
                 try
                 {
-                    store.CreateTicket(userId, title, description, priority);
+                    HelpdeskStore.CreateTicket(userId, title, description, priority);
                     Message = "Ticket created successfully.";
                 }
                 catch (Exception)
