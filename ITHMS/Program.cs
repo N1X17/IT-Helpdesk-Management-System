@@ -1,7 +1,10 @@
+using ITHMS.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddSingleton<HelpdeskStore>();
 
 var app = builder.Build();
 
