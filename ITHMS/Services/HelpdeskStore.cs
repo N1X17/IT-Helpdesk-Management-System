@@ -17,9 +17,9 @@ namespace ITHMS.Services
         // Adds sample users to the system.
         public HelpdeskStore()
         {
-            Users.Add(new User(1, "Demo Employee","employee@example.com", UserRole.Employee));
-            Users.Add(new User(2, "Demo Technician","technician@example.com", UserRole.Technician));
-            Users.Add(new User(3, "Demo Administrator","admin@example.com", UserRole.Administrator));
+            Users.Add(new User() { UserId = 1, FullName = "Demo Employee", Email = "employee@example.com", Role = UserRole.Employee });
+            Users.Add(new User() { UserId = 2, FullName = "Demo Technician", Email = "technician@example.com", Role = UserRole.Technician });
+            Users.Add(new User() { UserId = 3, FullName = "Demo Administrator", Email = "admin@example.com", Role = UserRole.Administrator }); 
         }
 
         // Returns all users.
@@ -51,9 +51,18 @@ namespace ITHMS.Services
         // Creates a new ticket.
         public Ticket CreateTicket(int userId, string title, string description, TicketPriority priority)
         {
-            Ticket ticket = new Ticket(userId, title, description);
-            ticket.TicketId = nextTicketId;
-            ticket.Priority = priority;
+            if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(description))
+            {
+                throw new Exception("Title and description cannot be empty.");
+            }
+
+            Ticket ticket = new ()
+            {
+                UserId = userId,
+                Title = title,
+                Description = description
+            };
+
             Tickets.Add(ticket);
             nextTicketId++;
             return ticket;
@@ -102,8 +111,14 @@ namespace ITHMS.Services
             {
                 throw new Exception("Ticket not found.");
             }
-            TicketComment comment = new TicketComment(ticketId, userId, message);
-            comment.CommentId = nextCommentId;
+
+            if (string.IsNullOrWhiteSpace(message))
+            {
+                throw new Exception("Comment cannot be empty.");
+            }
+
+            TicketComment comment = new TicketComment()
+            { CommentId = nextCommentId, TicketId = ticketId, UserId = userId, Message = message.Trim() };
             Comments.Add(comment);
             nextCommentId++;
         }

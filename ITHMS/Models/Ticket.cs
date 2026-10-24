@@ -8,31 +8,15 @@ namespace ITHMS.Models
     public class Ticket
     {
         public int TicketId { get; set; }
-
-        [Required(ErrorMessage = "Title is required.")]
-        [StringLength(100, MinimumLength = 3)]
-        public string Title { get; set; } = "";
-
-        [Required(ErrorMessage = "Description is required.")]
-        [StringLength(2000, MinimumLength = 10)]
-        public string Description { get; set; } = "";
-
-
-        [Range(1, int.MaxValue,ErrorMessage = "Select a valid user.")]
+        public required string Title { get; set; }
+        public required string Description { get; set; }
         public int UserId {  get; set; }
-        public int AssignedTechnicianId {  get; set; }
-        public TicketStatus Status { get; set; } 
+        public int? AssignedTechnicianId {  get; set; }
+        public TicketStatus Status { get; set; } = TicketStatus.Open;
         public DateTime CreatedAt { get; set; } = DateTime.Now;
-        public TicketPriority Priority { get; set; }
+        public TicketPriority Priority { get; set; } = TicketPriority.Medium;
 
         public Ticket() { }
-
-        public Ticket(int userId, string title, string description)
-        {
-            UserId = userId;
-            Title = title;
-            Description = description;
-        }
 
         // Checks whether the ticket is still active.
         public bool IsActive()

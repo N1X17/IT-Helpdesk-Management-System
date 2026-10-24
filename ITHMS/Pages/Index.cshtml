@@ -1,20 +1,61 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "Home";
 }
 
-<div class="container pb-5 text-center">
-    <h3> Who Can Use ITHMS?</h3>
-    <p class="test-muted">
-        Employees can submit IT requests,
-        technicians can manage and resolve issues,
-        and administrators can oversee 
-        helpdesk operations.
-    </p>
+<div class="bg-primary text-white text-center py-5">
+    <div class="container">
+        <h1> Welcome to IT Helpdesk</h1>
+        <p>Submit, track, and manage technical support requests in one place.</p>
+        <div class="mt-4">
+            <a href="#how-it-works" class="btn btn-light">Learn More</a>
+        </div>
 
-    <p>
-        Please sign in to access your helpdesk account.
-        <a asp-page="/Account/Login"> Login </a>
-    </p>
+    </div>
+</div>
+
+<div class="container py-5" id="how-it-works">
+    <h2 class="text-center mb-2">How ITHMS Works</h2>
+    <p class="text-center text-muted md-4">Get IT assistance in three simple steps.</p>
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <h4>1. Submit</h4>
+                    <p>Describe your technical problemand create a support ticket.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <h4>2. Track</h4>
+                    <p> Check the progress and status of your support request.</p>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body text-center">
+                    <h4>3. Resolve</h4>
+                    <p>Communicate with the IT team and receive a solution.</p>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="container pb-5 text-center">
+    <h3>Who Can Use ITHMS?</h3>
+    <p class="text-muted">Employees can submit IT requests,technicians can manage and resolve issues,
+        and administrators can oversee helpdesk operations.</p>
+    <p>Please sign in to access your helpdesk account.</p>
+
 </div>
