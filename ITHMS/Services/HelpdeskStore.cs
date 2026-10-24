@@ -58,9 +58,13 @@ namespace ITHMS.Services
 
             Ticket ticket = new ()
             {
+                TicketId = nextTicketId,
                 UserId = userId,
                 Title = title,
-                Description = description
+                Description = description,
+                Priority = priority,
+                Status = TicketStatus.Open,
+                CreatedAt = DateTime.Now
             };
 
             Tickets.Add(ticket);
