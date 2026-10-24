@@ -1,4 +1,51 @@
 ﻿@page
+@using ITHMS.Models
 @model ITHMS.Pages.Tickets.IndexModel
 @{
+    ViewData["Title"] = "View Tickets";
 }
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center">
+        <div>
+            <h2>Support Tickets</h2>
+            <p class="text-muted">View all submitted IT support requests.</p>
+        </div>
+        <a href="/Tickets/Create" class="btn btn-primary">+ New Ticket</a>
+    </div>
+    <div class="card shadow mt-4">
+        <div class="card-body">
+            @if(Model.Tickets.Count == 0)
+            {
+               <p class="text-muted text-center">No tickets have been submitted yet.</p> 
+            }
+            else
+            {
+                <table class="table table-bordered table-hover">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Ticket ID</th>
+                            <th>Title</th>
+                            <th>Priority</th>
+                            <th>Status</th>
+                            <th>Created At</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (Ticket ticket in Model.Tickets)
+                        {
+                            <tr>
+                                <td>@ticket.TicketId</td>
+                                <td>@ticket.Title</td>
+                                <td>@ticket.Priority</td>
+                                <td>@ticket.Status</td>
+                                <td>@ticket.CreatedAt</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+</div>
