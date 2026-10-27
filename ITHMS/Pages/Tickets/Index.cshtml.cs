@@ -8,10 +8,14 @@ namespace ITHMS.Pages.Tickets
     public class IndexModel : PageModel
     {
         public List<Ticket> Tickets = new List<Ticket>();
+        public int SelectedUserId { get; set; } = 1;
 
-        public void OnGet()
+        //for now there is only one user therefore userId is set to 1
+        public void OnGet(int userId = 1)
         {
-            Tickets = HelpdeskStore.GetTickets();
+            SelectedUserId = userId;
+
+            Tickets = HelpdeskStore.GetTickets().Where(t => t.UserId == SelectedUserId).ToList();
         }
     }
 }
