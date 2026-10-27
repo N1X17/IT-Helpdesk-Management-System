@@ -49,7 +49,7 @@ namespace ITHMS.Services
         }
 
         // Creates a new ticket.
-        public static Ticket CreateTicket(int userId, string title, string description, TicketPriority priority)
+        public static Ticket CreateTicket(int userId, string title, string description, TicketPriority priority, string category)
         {
             if (string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(description))
             {
@@ -63,6 +63,7 @@ namespace ITHMS.Services
                 Title = title,
                 Description = description,
                 Priority = priority,
+                Category = category,
                 Status = TicketStatus.Open,
                 CreatedAt = DateTime.Now
             };

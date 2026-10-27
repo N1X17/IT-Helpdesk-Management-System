@@ -8,8 +8,8 @@
 <div class="container mt-4">
     <div class="d-flex justify-content-between align-items-center">
         <div>
-            <h2>Support Tickets</h2>
-            <p class="text-muted">View all submitted IT support requests.</p>
+            <h2>My Tickets</h2>
+            <p class="text-muted">View IT support requests submitted by the selected employee.</p>
         </div>
         <a href="/Tickets/Create" class="btn btn-primary">+ New Ticket</a>
     </div>
@@ -17,18 +17,26 @@
         <div class="card-body">
             @if(Model.Tickets.Count == 0)
             {
-               <p class="text-muted text-center">No tickets have been submitted yet.</p> 
+                <p class="text-muted text-center">No tickets found for this employee.</p>
             }
             else
             {
-                <table class="table table-bordered table-hover">
+                <table class="table table-bordered table-hover" id="ticketsTable">
+                    <div class="mb-3">
+                        <input type="text"
+                               id="ticketSearch"
+                               class="form-control"
+                               placeholder="Search tickets by title, category, or status..." />
+                    </div>
                     <thead class="table-light">
                         <tr>
                             <th>Ticket ID</th>
                             <th>Title</th>
                             <th>Priority</th>
+                            <th>Category</th>
                             <th>Status</th>
                             <th>Created At</th>
+                            <th>Actions</th>
                         </tr>
                     </thead>
 
@@ -39,8 +47,13 @@
                                 <td>@ticket.TicketId</td>
                                 <td>@ticket.Title</td>
                                 <td>@ticket.Priority</td>
+                                <td>@ticket.Category</td>
                                 <td>@ticket.Status</td>
                                 <td>@ticket.CreatedAt</td>
+                                <td>
+                                    <a asp-page="./Details" asp-route-id="@ticket.TicketId" class="btn btn-sm btn-outline-primary">View Details</a>
+                                </td>
+
                             </tr>
                         }
                     </tbody>
@@ -49,3 +62,19 @@
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $("#ticketSearch").on("keyup", function () {
+                var search = $(this).val().toLowerCase();
+
+                $("#ticketsTable tbody tr").filter(function () {
+                    $(this).toggle(
+                        $(this).text().toLowerCase().indexOf(search) > -1
+                    );
+                });
+            });
+        });
+    </script>
+}
