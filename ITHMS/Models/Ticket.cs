@@ -22,7 +22,6 @@ namespace ITHMS.Models
         public DateTime CreatedAt { get; set; } = DateTime.Now;
         public TicketPriority Priority { get; set; } = TicketPriority.Medium;
 
-
         [Required(ErrorMessage = "Please select a category.")]
         public string Category { get; set; } = string.Empty;
 
