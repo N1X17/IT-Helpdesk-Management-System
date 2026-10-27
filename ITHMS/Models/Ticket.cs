@@ -1,4 +1,5 @@
-﻿// Represents an IT support request submitted by a user.
+﻿//
+// Represents an IT support request submitted by a user.
 
 using ITHMS.Models.Enums;
 using System.ComponentModel.DataAnnotations;

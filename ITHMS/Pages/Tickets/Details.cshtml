@@ -1,0 +1,86 @@
+@page
+@model ITHMS.Pages.Tickets.Details
+@{
+    ViewData["Title"] = "Ticket Details #" + Model.Ticket?.TicketId;
+}
+
+<div class="container mt-4">
+    <!-- Ticket Summary Card -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">#@Model.Ticket?.TicketId - @Model.Ticket?.Title</h4>
+            <span class="badge bg-light text-dark">@Model.Ticket?.Status</span>
+        </div>
+        <div class="card-body">
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <strong>Priority:</strong> 
+                    <span class="badge bg-warning text-dark">@Model.Ticket?.Priority</span>
+                </div>
+                <div class="col-md-3">
+                    <strong>User ID:</strong> @Model.Ticket?.UserId
+                </div>
+                <div class="col-md-3">
+                    <strong>Technician ID:</strong> @(Model.Ticket?.AssignedTechnicianId?.ToString() ?? "Unassigned")
+                </div>
+                <div class="col-md-3">
+                    <strong>Created At:</strong> @Model.Ticket?.CreatedAt.ToString("yyyy-MM-dd HH:mm")
+                </div>
+            </div>
+            <hr />
+            <h5>Description:</h5>
+            <p class="card-text text-muted">@Model.Ticket?.Description</p>
+        </div>
+    </div>
+
+    <!-- Comments Display Section -->
+    <div class="card mb-4 shadow-sm">
+        <div class="card-header bg-secondary text-white">
+            <h5 class="mb-0">Comments & Notes</h5>
+        </div>
+        <div class="card-body">
+            @if (Model.Comments != null && Model.Comments.Any())
+            {
+                <div class="list-group list-group-flush">
+                    @foreach (var comment in Model.Comments)
+                    {
+                        <div class="list-group-item mb-2 rounded border-start border-4 border-info bg-light">
+                            <div class="d-flex justify-content-between align-items-center mb-1">
+                                <strong class="text-primary">User ID: @comment.UserId</strong>
+                                <small class="text-muted">@comment.CreatedAt.ToString("g")</small>
+                            </div>
+                            <p class="mb-0 text-dark">@comment.Message</p>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-muted text-center my-3">No comments yet for this ticket.</p>
+            }
+        </div>
+    </div>
+
+    <!-- Add Comment Form Section -->
+    <div class="card shadow-sm mb-5">
+        <div class="card-header bg-light">
+            <h5 class="mb-0">Add a New Comment</h5>
+        </div>
+        <div class="card-body">
+            <form method="post" asp-page-handler="AddComment">
+                <div class="mb-3">
+                    <label asp-for="NewComment.UserId" class="form-label">User ID</label>
+                    <input asp-for="NewComment.UserId" class="form-control" placeholder="Enter your User ID (e.g., 1, 2, 3)" />
+                    <span asp-validation-for="NewComment.UserId" class="text-danger"></span>
+                </div>
+                <div class="mb-3">
+                    <label asp-for="NewComment.Message" class="form-label">Message</label>
+                    <textarea asp-for="NewComment.Message" class="form-control" rows="4" placeholder="Write your comment here..."></textarea>
+                    <span asp-validation-for="NewComment.Message" class="text-danger"></span>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Comment</button>
+                <a asp-page="./Manage" class="btn btn-outline-secondary">Back to Manage</a>
+            </form>
+        </div>
+    </div>
+</div>
